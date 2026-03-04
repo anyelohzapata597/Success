@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas - Success</title>
+    
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div id="root">
+        <nav class="navbar">
+            <div class="navbar__container">
+                <div class="navbar__logo">
+                    <h1>Success</h1>
+                </div>
+                <ul class="navbar__menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="habits.html">Hábitos</a></li>
+                    <li><a href="friends.html">Amigos</a></li>
+                    <li><a href="statistics.html">Estadísticas</a></li>
+                    <li><a href="profile.html">Perfil</a></li>
+                    <li><a href="login.html" class="btn btn--sm">Salir</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="container">
+                <h1>Estadísticas de Progreso</h1>
+
+                <!-- Resumen General -->
+                <section class="stats-overview mt-lg">
+                    <div class="grid grid--4">
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">12</div>
+                                <div class="stat__label">Nivel Actual</div>
+                            </div>
+                        </div>
+
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">4,250</div>
+                                <div class="stat__label">Puntos Totales</div>
+                            </div>
+                        </div>
+
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">🔥 22</div>
+                                <div class="stat__label">Racha Actual</div>
+                            </div>
+                        </div>
+
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">157</div>
+                                <div class="stat__label">Hábitos Completados</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gráfico de Progreso -->
+                <section class="charts mt-lg">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Progreso Semanal</h3>
+                        </div>
+                        <div class="card__content">
+                            <div class="weekly-chart">
+                                <p style="text-align: center; color: var(--color-gray);">
+                                    [Gráfico de barras: Hábitos completados por día]
+                                </p>
+                                <div class="chart-placeholder">
+                                    <!-- Los datos del gráfico se llenarían con una librería como Chart.js -->
+                                    <div class="bar" style="height: 70%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Lunes: 6/7"></div>
+                                    <div class="bar" style="height: 85%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Martes: 6/7"></div>
+                                    <div class="bar" style="height: 100%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Miércoles: 7/7"></div>
+                                    <div class="bar" style="height: 86%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Jueves: 6/7"></div>
+                                    <div class="bar" style="height: 71%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Viernes: 5/7"></div>
+                                    <div class="bar" style="height: 43%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Sábado: 3/7"></div>
+                                    <div class="bar" style="height: 57%; background: linear-gradient(180deg, var(--color-success), var(--color-accent));" title="Domingo: 4/7"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Estadísticas por Categoría -->
+                <section class="category-stats mt-lg">
+                    <h2>Rendimiento por Categoría</h2>
+                    <div class="grid grid--2">
+                        <div class="card">
+                            <h4 class="card__title">📚 Aprendizaje</h4>
+                            <div style="margin-top: var(--space-md);">
+                                <p><strong>Hábitos:</strong> 2</p>
+                                <p><strong>Completados:</strong> 45/49</p>
+                                <div class="progress mt-md">
+                                    <div class="progress__bar" style="width: 92%;"></div>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-sm);">92% de cumplimiento</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card__title">📊 Productividad</h4>
+                            <div style="margin-top: var(--space-md);">
+                                <p><strong>Hábitos:</strong> 2</p>
+                                <p><strong>Completados:</strong> 38/49</p>
+                                <div class="progress mt-md">
+                                    <div class="progress__bar" style="width: 77%;"></div>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-sm);">77% de cumplimiento</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card__title">🏃 Fitness</h4>
+                            <div style="margin-top: var(--space-md);">
+                                <p><strong>Hábitos:</strong> 1</p>
+                                <p><strong>Completados:</strong> 35/49</p>
+                                <div class="progress mt-md">
+                                    <div class="progress__bar" style="width: 71%;"></div>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-sm);">71% de cumplimiento</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card__title">🏥 Salud</h4>
+                            <div style="margin-top: var(--space-md);">
+                                <p><strong>Hábitos:</strong> 2</p>
+                                <p><strong>Completados:</strong> 47/49</p>
+                                <div class="progress mt-md">
+                                    <div class="progress__bar" style="width: 96%;"></div>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-sm);">96% de cumplimiento</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card__title">💰 Finanzas</h4>
+                            <div style="margin-top: var(--space-md);">
+                                <p><strong>Hábitos:</strong> 1</p>
+                                <p><strong>Completados:</strong> 40/49</p>
+                                <div class="progress mt-md">
+                                    <div class="progress__bar" style="width: 82%;"></div>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-sm);">82% de cumplimiento</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card__title">🧠 Concentración</h4>
+                            <div style="margin-top: var(--space-md);">
+                                <p><strong>Hábitos:</strong> 1</p>
+                                <p><strong>Completados:</strong> 35/49</p>
+                                <div class="progress mt-md">
+                                    <div class="progress__bar" style="width: 71%;"></div>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-sm);">71% de cumplimiento</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reporte Mensual -->
+                <section class="monthly-report mt-lg mb-lg">
+                    <h2>Reporte Mensual</h2>
+                    <div class="card">
+                        <div class="card__content">
+                            <p><strong>Mes:</strong> Febrero 2026</p>
+                            <p style="margin-top: var(--space-md);"><strong>Total de hábitos completados:</strong> 150/196</p>
+                            <p style="margin-top: var(--space-md);"><strong>Puntos ganados:</strong> 3,800</p>
+                            <p style="margin-top: var(--space-md);"><strong>Promedio diario:</strong> 5.4/7 hábitos</p>
+                            <p style="margin-top: var(--space-md);"><strong>Mejor día:</strong> Miércoles (7/7 hábitos)</p>
+                            <p style="margin-top: var(--space-md);"><strong>Racha más larga:</strong> 18 días</p>
+                            <p style="margin-top: var(--space-md);"><strong>Mejora respecto al mes anterior:</strong> ⬆️ 12%</p>
+                        </div>
+                        <div class="card__footer">
+                            <button class="btn btn--primary">📥 Descargar Reporte</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .stat {
+            text-align: center;
+        }
+
+        .stat__value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-success);
+            font-family: var(--font-mono);
+        }
+
+        .stat__label {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+            margin-top: var(--space-sm);
+        }
+
+        .chart-placeholder {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 300px;
+            margin-top: var(--space-lg);
+            gap: var(--space-sm);
+        }
+
+        .bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            transition: opacity 200ms ease-in-out;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 639px) {
+            .grid--4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid--2 {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-placeholder {
+                height: 200px;
+            }
+        }
+    </style>
+</body>
+</html>

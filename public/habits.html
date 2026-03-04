@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Hábitos - Success</title>
+    
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div id="root">
+        <nav class="navbar">
+            <div class="navbar__container">
+                <div class="navbar__logo">
+                    <h1>Success</h1>
+                </div>
+                <ul class="navbar__menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="habits.html">Hábitos</a></li>
+                    <li><a href="friends.html">Amigos</a></li>
+                    <li><a href="statistics.html">Estadísticas</a></li>
+                    <li><a href="profile.html">Perfil</a></li>
+                    <li><a href="login.html" class="btn btn--sm">Salir</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Mis Hábitos</h1>
+                    <button class="btn btn--primary">+ Nuevo Hábito</button>
+                </div>
+
+                <!-- Filtros -->
+                <section class="filters mt-lg">
+                    <select id="categoryFilter">
+                        <option value="">Todas las categorías</option>
+                        <option value="salud">🏥 Salud</option>
+                        <option value="productividad">📊 Productividad</option>
+                        <option value="aprendizaje">📚 Aprendizaje</option>
+                        <option value="fitness">🏃 Fitness</option>
+                        <option value="finanzas">💰 Finanzas</option>
+                        <option value="concentracion">🧠 Concentración</option>
+                        <option value="otras">🎯 Otras</option>
+                    </select>
+                </section>
+
+                <!-- Lista de Hábitos por Categoría -->
+                <section class="habits-by-category mt-lg">
+                    <!-- Categoría: Salud -->
+                    <div class="category-group">
+                        <h2 class="category-title">🏥 Salud</h2>
+                        <div class="habits-grid">
+                            <div class="card card--habit">
+                                <div class="card__header">
+                                    <h4 class="card__title">Dormir 8 horas</h4>
+                                    <div class="badge badge--success">7/7 días</div>
+                                </div>
+                                <div class="card__content">
+                                    <p>Dormir al menos 8 horas todas las noches para recuperación.</p>
+                                    <div class="progress mt-md">
+                                        <div class="progress__bar" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card__footer">
+                                    <button class="btn btn--sm btn--outline">Editar</button>
+                                    <button class="btn btn--sm btn--danger">Eliminar</button>
+                                </div>
+                            </div>
+
+                            <div class="card card--habit">
+                                <div class="card__header">
+                                    <h4 class="card__title">Beber agua</h4>
+                                    <div class="badge badge--success">5/7 días</div>
+                                </div>
+                                <div class="card__content">
+                                    <p>Beber 8 vasos de agua durante el día.</p>
+                                    <div class="progress mt-md">
+                                        <div class="progress__bar" style="width: 71%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card__footer">
+                                    <button class="btn btn--sm btn--outline">Editar</button>
+                                    <button class="btn btn--sm btn--danger">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Productividad -->
+                    <div class="category-group">
+                        <h2 class="category-title">📊 Productividad</h2>
+                        <div class="habits-grid">
+                            <div class="card card--habit">
+                                <div class="card__header">
+                                    <h4 class="card__title">Planificación semanal</h4>
+                                    <div class="badge badge--primary">4/7 días</div>
+                                </div>
+                                <div class="card__content">
+                                    <p>Planificar las tareas importantes de la semana los domingos.</p>
+                                    <div class="progress mt-md">
+                                        <div class="progress__bar" style="width: 57%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card__footer">
+                                    <button class="btn btn--sm btn--outline">Editar</button>
+                                    <button class="btn btn--sm btn--danger">Eliminar</button>
+                                </div>
+                            </div>
+
+                            <div class="card card--habit">
+                                <div class="card__header">
+                                    <h4 class="card__title">Revisar emails</h4>
+                                    <div class="badge badge--success">6/7 días</div>
+                                </div>
+                                <div class="card__content">
+                                    <p>Revisar y responder emails importantes cada mañana.</p>
+                                    <div class="progress mt-md">
+                                        <div class="progress__bar" style="width: 86%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card__footer">
+                                    <button class="btn btn--sm btn--outline">Editar</button>
+                                    <button class="btn btn--sm btn--danger">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Aprendizaje -->
+                    <div class="category-group">
+                        <h2 class="category-title">📚 Aprendizaje</h2>
+                        <div class="habits-grid">
+                            <div class="card card--habit">
+                                <div class="card__header">
+                                    <h4 class="card__title">Lectura matutina</h4>
+                                    <div class="badge badge--success">22 días racha</div>
+                                </div>
+                                <div class="card__content">
+                                    <p>Leer 30 minutos de un libro de desarrollo personal.</p>
+                                    <div class="progress mt-md">
+                                        <div class="progress__bar" style="width: 100%;"></div>
+                                    </div>
+                                    <small style="color: var(--color-gray); margin-top: var(--space-sm);">
+                                        Racha: 🔥 22 días | Máxima: 🔥 22 días
+                                    </small>
+                                </div>
+                                <div class="card__footer">
+                                    <button class="btn btn--sm btn--outline">Editar</button>
+                                    <button class="btn btn--sm btn--danger">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Fitness -->
+                    <div class="category-group">
+                        <h2 class="category-title">🏃 Fitness</h2>
+                        <div class="habits-grid">
+                            <div class="card card--habit">
+                                <div class="card__header">
+                                    <h4 class="card__title">Ejercicio diario</h4>
+                                    <div class="badge badge--success">5/7 días</div>
+                                </div>
+                                <div class="card__content">
+                                    <p>30 minutos de ejercicio físico (running, gym o yoga).</p>
+                                    <div class="progress mt-md">
+                                        <div class="progress__bar" style="width: 71%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card__footer">
+                                    <button class="btn btn--sm btn--outline">Editar</button>
+                                    <button class="btn btn--sm btn--danger">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .filters select {
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .category-group {
+            margin-bottom: var(--space-xl);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            color: var(--color-black);
+        }
+
+        .habits-grid {
+            display: grid;
+            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        @media (max-width: 639px) {
+            .page-header {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: stretch;
+            }
+
+            .page-header button {
+                width: 100%;
+            }
+
+            .habits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

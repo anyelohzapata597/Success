@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Success</title>
+    
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div id="root">
+        <nav class="navbar">
+            <div class="navbar__container">
+                <div class="navbar__logo">
+                    <h1>Success</h1>
+                </div>
+                <ul class="navbar__menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="habits.html">Hábitos</a></li>
+                    <li><a href="friends.html">Amigos</a></li>
+                    <li><a href="statistics.html">Estadísticas</a></li>
+                    <li><a href="profile.html">Perfil</a></li>
+                    <li><a href="login.html" class="btn btn--sm">Salir</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="container">
+                <!-- Fragmento Motivacional -->
+                <section class="motivational-section">
+                    <div class="card card--stat">
+                        <div class="card__header">
+                            <div>
+                                <h3 class="card__title">💡 Inspiración del Día</h3>
+                                <p class="card__subtitle">Reflexión matinal</p>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <p style="font-size: 1.1rem; font-style: italic; color: var(--color-primary);">
+                                "El éxito no es el final, el fracaso no es fatal: lo que cuenta es el coraje de continuar."
+                            </p>
+                            <p style="font-size: 0.875rem; color: var(--color-gray); margin-top: var(--space-md);">
+                                — Winston Churchill
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Estadísticas Rápidas -->
+                <section class="stats-section mt-lg">
+                    <h2>Tu Progreso Hoy</h2>
+                    <div class="grid grid--4">
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">5</div>
+                                <div class="stat__label">Hábitos Completados</div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress__bar" style="width: 83%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">750</div>
+                                <div class="stat__label">Puntos Ganados</div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress__bar" style="width: 75%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">Nivel 12</div>
+                                <div class="stat__label">Tu Nivel Actual</div>
+                            </div>
+                        </div>
+
+                        <div class="card card--stat">
+                            <div class="stat">
+                                <div class="stat__value">🔥 22</div>
+                                <div class="stat__label">Racha Actual</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hábitos del Día -->
+                <section class="habits-section mt-lg">
+                    <div class="section-header">
+                        <h2>Hábitos de Hoy</h2>
+                        <a href="habits.html" class="btn btn--sm btn--outline">Ver todos</a>
+                    </div>
+
+                    <div class="habits-list">
+                        <!-- Hábito 1 - Completado -->
+                        <div class="card card--habit completed">
+                            <div class="card__header">
+                                <div>
+                                    <h4 class="card__title">✅ Lectura Matutina</h4>
+                                    <span class="badge badge--success">Completado</span>
+                                </div>
+                                <div class="points">+100 pts</div>
+                            </div>
+                            <div class="card__content">
+                                <p>Leer 30 minutos por la mañana de un libro de desarrollo personal.</p>
+                                <small style="color: var(--color-gray);">Categoría: Aprendizaje</small>
+                            </div>
+                        </div>
+
+                        <!-- Hábito 2 - Pendiente -->
+                        <div class="card card--habit">
+                            <div class="card__header">
+                                <div>
+                                    <h4 class="card__title">🏃 Ejercicio Diario</h4>
+                                    <span class="badge badge--warning">Pendiente</span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                                <p>30 minutos de ejercicio físico (running, gym o yoga).</p>
+                                <small style="color: var(--color-gray);">Categoría: Fitness</small>
+                            </div>
+                            <div class="card__footer">
+                                <button class="btn btn--sm btn--primary">Marcar como Hecho</button>
+                            </div>
+                        </div>
+
+                        <!-- Hábito 3 - Pendiente -->
+                        <div class="card card--habit">
+                            <div class="card__header">
+                                <div>
+                                    <h4 class="card__title">💻 Aprendizaje Técnico</h4>
+                                    <span class="badge badge--warning">Pendiente</span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                                <p>Dedicar 1 hora a aprender una nueva tecnología o habilidad.</p>
+                                <small style="color: var(--color-gray);">Categoría: Productividad</small>
+                            </div>
+                            <div class="card__footer">
+                                <button class="btn btn--sm btn--primary">Marcar como Hecho</button>
+                            </div>
+                        </div>
+
+                        <!-- Hábito 4 - Completado -->
+                        <div class="card card--habit completed">
+                            <div class="card__header">
+                                <div>
+                                    <h4 class="card__title">✅ Meditación</h4>
+                                    <span class="badge badge--success">Completado</span>
+                                </div>
+                                <div class="points">+80 pts</div>
+                            </div>
+                            <div class="card__content">
+                                <p>10 minutos de meditación o mindfulness.</p>
+                                <small style="color: var(--color-gray);">Categoría: Concentración</small>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ranking de Amigos -->
+                <section class="friends-section mt-lg mb-lg">
+                    <div class="section-header">
+                        <h2>Tus Amigos en la Competencia</h2>
+                        <a href="friends.html" class="btn btn--sm btn--outline">Ver todos</a>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Posición</th>
+                                <th>Usuario</th>
+                                <th>Nivel</th>
+                                <th>Puntos</th>
+                                <th>Racha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: var(--color-green-light);">
+                                <td>🥇</td>
+                                <td><strong>Tú (Juan Pérez)</strong></td>
+                                <td>12</td>
+                                <td>4,250</td>
+                                <td>🔥 22</td>
+                            </tr>
+                            <tr>
+                                <td>🥈</td>
+                                <td>María García</td>
+                                <td>11</td>
+                                <td>3,890</td>
+                                <td>🔥 18</td>
+                            </tr>
+                            <tr>
+                                <td>🥉</td>
+                                <td>Carlos López</td>
+                                <td>10</td>
+                                <td>3,120</td>
+                                <td>🔥 15</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Ana Martínez</td>
+                                <td>9</td>
+                                <td>2,540</td>
+                                <td>🔥 12</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat__value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-success);
+            font-family: var(--font-mono);
+        }
+
+        .stat__label {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+            margin-top: var(--space-sm);
+        }
+
+        .points {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+        }
+
+        .habits-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        @media (max-width: 639px) {
+            .grid--4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: flex-start;
+            }
+
+            .section-header a {
+                width: 100%;
+            }
+        }
+    </style>
+</body>
+</html>
