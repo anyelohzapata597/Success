@@ -24,7 +24,7 @@
 ```bash
 npm install && npm run dev
 ```
-Luego abre [http://localhost:5174](http://localhost:5174)
+Luego abre [http://localhost:5174/login](http://localhost:5174/login)
 
 ### 📖 Si Quieres Detalles Técnicos
 👉 **[PROGRESS.md](PROGRESS.md)** - Resumen sesión anterior, arquitectura, componentes
