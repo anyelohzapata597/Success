@@ -1,23 +1,10 @@
 import { Card, CardHeader, CardBody } from '@/components/ui'
 import { RegisterForm } from '@/components/forms'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
 
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleSubmit = async (data: any) => {
-    setIsLoading(true)
-    try {
-      // Simular llamada a API (se reemplazará con Firebase en Fase 3)
-      console.log('Register intent:', data)
-      toast.success('¡Cuenta creada correctamente!')
-      // navigate('/login')
-    } catch (error) {
-      toast.error('Error al crear la cuenta')
-    } finally {
-      setIsLoading(false)
-    }
+  const handleSubmit = (data: any) => {
+    // The RegisterForm handles the submission now
+    console.log('Form submitted with data:', data)
   }
 
   return (
@@ -28,7 +15,7 @@ export default function RegisterPage() {
           <p className="text-gray-600">Comienza tu viaje hacia el éxito</p>
         </CardHeader>
         <CardBody>
-          <RegisterForm onSubmit={handleSubmit} isLoading={isLoading} />
+          <RegisterForm onSubmit={handleSubmit} />
         </CardBody>
       </Card>
     </div>

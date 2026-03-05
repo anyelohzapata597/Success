@@ -89,19 +89,21 @@ interface FormCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string
 }
 
-export function FormCheckbox({ label, error, className, ...rest }: FormCheckboxProps) {
+export function FormCheckbox({ label, error, className, disabled, ...rest }: FormCheckboxProps) {
   return (
     <div className="mb-4 flex items-start">
       <input
         type="checkbox"
+        disabled={disabled}
         className={clsx(
           'w-5 h-5 mt-0.5 border-gray-300 rounded text-success focus:ring-2 focus:ring-success cursor-pointer',
+          disabled && 'opacity-50 cursor-not-allowed',
           className
         )}
         {...rest}
       />
       {label && (
-        <label className="ml-3 text-sm font-body text-gray-700 cursor-pointer">
+        <label className={clsx('ml-3 text-sm font-body cursor-pointer', disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700')}>
           {label}
           {rest.required && <span className="text-red-500"> *</span>}
         </label>

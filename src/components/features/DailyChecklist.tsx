@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader, Badge } from '@/components/ui'
 
-interface DailyChecklistProps {
+interface DailyChecklistItemProps {
   habit: {
     id: string
     name: string
@@ -10,7 +10,7 @@ interface DailyChecklistProps {
   onToggle: (habitId: string, completed: boolean) => void
 }
 
-export function DailyChecklistItem({ habit, isCompleted, onToggle }: DailyChecklistProps) {
+export function DailyChecklistItem({ habit, isCompleted, onToggle }: DailyChecklistItemProps) {
   const handleToggle = () => {
     onToggle(habit.id, !isCompleted)
   }
@@ -55,13 +55,13 @@ interface DailyChecklistProps {
     id: string
     name: string
     category: string
-    isCompleted: boolean
+    isCompleted?: boolean
   }>
   onToggle: (habitId: string, completed: boolean) => void
   progressPercentage?: number
 }
 
-export function DailyChecklist({ habits, onToggle, progressPercentage }: DailyChecklistProps) {
+export function DailyChecklist({ habits, onToggle, progressPercentage = 0 }: DailyChecklistProps) {
   const completedCount = habits.filter((h) => h.isCompleted).length
 
   return (
@@ -80,7 +80,7 @@ export function DailyChecklist({ habits, onToggle, progressPercentage }: DailyCh
           <DailyChecklistItem
             key={habit.id}
             habit={habit}
-            isCompleted={habit.isCompleted}
+            isCompleted={habit.isCompleted || false}
             onToggle={onToggle}
           />
         ))}

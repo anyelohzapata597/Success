@@ -2,7 +2,6 @@ import { Card, CardBody, Avatar, Badge } from '@/components/ui'
 import { formatNumber } from '@/utils/formatters'
 
 interface FriendCardProps {
-  id: string
   name: string
   initials: string
   level: number
@@ -11,12 +10,9 @@ interface FriendCardProps {
   habitsCompletedThisWeek: number
   position?: number
   isCurrentUser?: boolean
-  onViewProfile?: (id: string) => void
-  onAddFriend?: (id: string) => void
 }
 
 export function FriendCard({
-  id,
   name,
   initials,
   level,
@@ -25,8 +21,6 @@ export function FriendCard({
   habitsCompletedThisWeek,
   position,
   isCurrentUser = false,
-  onViewProfile,
-  onAddFriend,
 }: FriendCardProps) {
   return (
     <Card

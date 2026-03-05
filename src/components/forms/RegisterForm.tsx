@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui'
 import { FormInput, FormCheckbox } from '@/components/ui'
 import { Link } from 'react-router-dom'
+import { useAuth } from '@/hooks'
+import toast from 'react-hot-toast'
 
 interface RegisterFormProps {
   onSubmit?: (data: {
@@ -11,10 +14,12 @@ interface RegisterFormProps {
     confirmPassword: string
     agreedToTerms: boolean
   }) => void
-  isLoading?: boolean
 }
 
-export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps) {
+export function RegisterForm({ onSubmit }: RegisterFormProps) {
+  const navigate = useNavigate()
+  const { register, loading, isAuthenticated } = useAuth()
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,6 +29,14 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [passwordStrength, setPasswordStrength] = useState(0)
+  const [localLoading, setLocalLoading] = useState(false)
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated && !loading) {
+      navigate('/dashboard')
+    }
+  }, [isAuthenticated, loading, navigate])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = e.target
@@ -63,11 +76,34 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
     return newErrors
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const newErrors = validate()
+
     if (Object.keys(newErrors).length === 0) {
-      onSubmit?.(formData)
+      setLocalLoading(true)
+      try {
+        const result = await register({
+          email: formData.email,
+          password: formData.password,
+          displayName: formData.name,
+        })
+
+        if (result.success) {
+          toast.success('¡Registro exitoso!')
+          onSubmit?.(formData)
+          // Navigation happens via useEffect when isAuthenticated changes
+        } else {
+          toast.error(result.error || 'Error al registrarse')
+          setErrors({ submit: result.error || 'Error al registrarse' })
+        }
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Error al registrarse'
+        toast.error(errorMessage)
+        setErrors({ submit: errorMessage })
+      } finally {
+        setLocalLoading(false)
+      }
     } else {
       setErrors(newErrors)
     }
@@ -80,8 +116,16 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
     return 'bg-success'
   }
 
+  const isLoading = loading || localLoading
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {errors.submit && (
+        <div className="p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
+          {errors.submit}
+        </div>
+      )}
+
       <FormInput
         label="Nombre Completo"
         type="text"
@@ -90,6 +134,7 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
         onChange={handleChange}
         error={errors.name}
         placeholder="Tu nombre"
+        disabled={isLoading}
         required
       />
 
@@ -101,6 +146,7 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
         onChange={handleChange}
         error={errors.email}
         placeholder="usuario@ejemplo.com"
+        disabled={isLoading}
         required
       />
 
@@ -113,6 +159,7 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
           onChange={handleChange}
           error={errors.password}
           placeholder="Mínimo 8 caracteres"
+          disabled={isLoading}
           required
         />
         {formData.password && (
@@ -144,6 +191,7 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
         onChange={handleChange}
         error={errors.confirmPassword}
         placeholder="Repite tu contraseña"
+        disabled={isLoading}
         required
       />
 
@@ -154,6 +202,7 @@ export function RegisterForm({ onSubmit, isLoading = false }: RegisterFormProps)
         checked={formData.agreedToTerms}
         onChange={handleChange}
         error={errors.agreedToTerms}
+        disabled={isLoading}
         required
       />
 

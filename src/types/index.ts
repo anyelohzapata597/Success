@@ -79,3 +79,21 @@ export interface BookFragment {
   featured: boolean
   views?: number
 }
+
+export interface Badge {
+  id: string
+  name: string
+  description: string
+  icon: string
+  requirement: number // Points or streaks needed
+  type: 'points' | 'streak' | 'habits_created' | 'habits_completed'
+  rarity: 'common' | 'rare' | 'epic' | 'legendary'
+}
+
+export interface Achievement {
+  id: string
+  userId: string
+  badgeId: string
+  unlockedAt: Date
+  progress: number // Current progress toward unlock
+}

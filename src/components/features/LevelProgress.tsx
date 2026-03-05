@@ -1,6 +1,5 @@
 import { Card, CardBody, Badge, ProgressBar } from '@/components/ui'
-import { Button } from '@/components/ui'
-import clsx from 'clsx'
+
 
 interface LevelProgressProps {
   currentLevel: number

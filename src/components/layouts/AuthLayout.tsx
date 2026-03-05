@@ -5,8 +5,10 @@ import { Outlet } from 'react-router-dom'
 
 export default function AuthLayout() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-success to-primary flex items-center justify-center">
-      <Outlet />
+    <div className="min-h-screen bg-gradient-to-br from-success to-primary flex items-center justify-center relative overflow-hidden">
+      <div className="relative z-10 w-full">
+        <Outlet />
+      </div>
     </div>
   )
 }

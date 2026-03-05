@@ -1,4 +1,4 @@
-import { Card, CardBody, Badge, ProgressBar, Button } from '@/components/ui'
+import { Card, CardBody, ProgressBar, Button } from '@/components/ui'
 import clsx from 'clsx'
 
 interface StreakBadgeProps {
@@ -15,7 +15,6 @@ export function StreakBadge({
   onViewHistory,
 }: StreakBadgeProps) {
   const isOnFire = days > 0
-  const progressPercentage = (days / maxDays) * 100
 
   return (
     <Card

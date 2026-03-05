@@ -1,20 +1,15 @@
 import { Card, CardBody } from '@/components/ui'
-import { formatRelativeTime } from '@/utils/formatters'
 
 interface MotivationalQuoteProps {
   text: string
   author: string
   book?: string
-  showTime?: boolean
-  createdAt?: Date
 }
 
 export function MotivationalQuote({
   text,
   author,
   book,
-  showTime = false,
-  createdAt,
 }: MotivationalQuoteProps) {
   return (
     <Card className="bg-gradient-to-r from-success to-primary text-white">
@@ -29,10 +24,6 @@ export function MotivationalQuote({
           <p className="font-heading font-bold">— {author}</p>
           {book && <p className="text-sm opacity-75">{book}</p>}
         </div>
-
-        {showTime && createdAt && (
-          <p className="text-xs opacity-50 mt-3">{formatRelativeTime(createdAt)}</p>
-        )}
       </CardBody>
     </Card>
   )

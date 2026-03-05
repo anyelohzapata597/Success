@@ -41,7 +41,7 @@ export function calculatePointsForNextLevel(
     LEVELS.basePtsPerLevel + LEVELS.multiplier * (currentLevel - 1)
   const pointsFromPrevious = currentLevel > 1
     ? Array.from({ length: currentLevel - 1 })
-        .reduce((acc, _, i) => {
+        .reduce((acc: number, _, i: number) => {
           return acc + (LEVELS.basePtsPerLevel + LEVELS.multiplier * i)
         }, 0)
     : 0

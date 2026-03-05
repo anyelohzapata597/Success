@@ -1,98 +1,144 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '@/hooks'
 import { useHabitStore } from '@/store/habitStore'
+import { useGamification } from '@/hooks'
+import toast from 'react-hot-toast'
 import {
   StatCard,
   HabitCard,
   MotivationalQuote,
   LevelProgress,
   DailyChecklist,
+  BadgeShowcase,
 } from '@/components/features'
-import { Button } from '@/components/ui'
+import { Button, Loader } from '@/components/ui'
 import { Link } from 'react-router-dom'
 
 export default function DashboardPage() {
-  const { habits } = useHabitStore()
+  const navigate = useNavigate()
+  const { user, loading: authLoading, isAuthenticated } = useAuth()
+  const { habits: storeHabits } = useHabitStore()
+  const { completeHabitWithRewards, getUserBadges } = useGamification()
   const [todayCompleted, setTodayCompleted] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [userBadges, setUserBadges] = useState([])
 
-  // Datos mock (se reemplazarán con Firebase en Fase 3)
-  const mockUser = {
-    name: 'Juan Pérez',
-    level: 12,
-    totalPoints: 4250,
-    currentPoints: 250,
-    streakdays: 22,
-    habitsCompletedToday: 2,
-    habitsTotal: 5,
-    friends: 8,
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      navigate('/login')
+    }
+  }, [isAuthenticated, authLoading, navigate])
+
+  // Initialize loading state
+  useEffect(() => {
+    if (!authLoading) {
+      setLoading(false)
+    }
+  }, [authLoading])
+
+  if (loading || authLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader size="lg" />
+      </div>
+    )
   }
 
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-gray-600">Loading user data...</p>
+      </div>
+    )
+  }
+
+  // Mock quote (will be replaced with real data from Firebase)
   const mockQuote = {
     text: 'El éxito no es final, el fracaso no es fatal: lo que cuenta es el coraje de continuar.',
     author: 'Winston Churchill',
     book: 'Pensamientos Profundos',
   }
 
-  const mockHabits = [
+  // Use real habits from store, or mock data if empty
+  const displayHabits = storeHabits.length > 0 ? storeHabits : [
     {
       id: '1',
       name: 'Meditar 30 minutos',
-      category: 'concentracion',
+      description: 'Meditación diaria',
+      category: 'concentracion' as const,
+      frequency: 'daily' as const,
+      createdAt: new Date(),
+      active: true,
       streak: 22,
       maxStreak: 30,
       points: 100,
-      isToday: true,
-      isCompleted: true,
+      userId: user.uid,
     },
     {
       id: '2',
       name: 'Ejercicio cardio',
-      category: 'fitness',
+      description: 'Ejercicio cardiovascular',
+      category: 'fitness' as const,
+      frequency: 'daily' as const,
+      createdAt: new Date(),
+      active: true,
       streak: 18,
       maxStreak: 22,
       points: 100,
-      isToday: true,
-      isCompleted: true,
+      userId: user.uid,
     },
     {
       id: '3',
       name: 'Leer 30 minutos',
-      category: 'aprendizaje',
+      description: 'Lectura diaria',
+      category: 'aprendizaje' as const,
+      frequency: 'daily' as const,
+      createdAt: new Date(),
+      active: true,
       streak: 15,
       maxStreak: 25,
       points: 100,
-      isToday: true,
-      isCompleted: false,
+      userId: user.uid,
     },
     {
       id: '4',
       name: 'Beber 8 vasos de agua',
-      category: 'salud',
+      description: 'Hidratación',
+      category: 'salud' as const,
+      frequency: 'daily' as const,
+      createdAt: new Date(),
+      active: true,
       streak: 8,
       maxStreak: 20,
       points: 50,
-      isToday: true,
-      isCompleted: false,
+      userId: user.uid,
     },
     {
       id: '5',
       name: 'Revisar emails',
-      category: 'productividad',
+      description: 'Productividad',
+      category: 'productividad' as const,
+      frequency: 'daily' as const,
+      createdAt: new Date(),
+      active: true,
       streak: 5,
       maxStreak: 12,
       points: 75,
-      isToday: false,
-      isCompleted: false,
+      userId: user.uid,
     },
   ]
 
-  const progressPercentage = Math.round((todayCompleted / mockHabits.filter(h => h.isToday).length) * 100)
+  const todayHabits = displayHabits.slice(0, 4)
+  const progressPercentage = todayHabits.length > 0 ? Math.round((todayCompleted / todayHabits.length) * 100) : 0
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-heading font-bold text-gray-900 mb-2">
-          ¡Bienvenido, {mockUser.name}!
+          ¡Bienvenido, {user.displayName}!
         </h1>
         <p className="text-gray-600">Aquí va tu resumen del día</p>
       </div>
@@ -109,10 +155,10 @@ export default function DashboardPage() {
       {/* Level Progress */}
       <div className="mb-8">
         <LevelProgress
-          currentLevel={mockUser.level}
-          currentPoints={mockUser.currentPoints}
-          pointsForNextLevel={750}
-          totalPointsForLevel={1000}
+          currentLevel={user.level}
+          currentPoints={user.currentPoints}
+          pointsForNextLevel={100}
+          totalPointsForLevel={100}
         />
       </div>
 
@@ -120,31 +166,31 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 mb-8">
         <StatCard
           label="Nivel Actual"
-          value={mockUser.level}
+          value={user.level}
           icon="🎖️"
           variant="success"
-          subText={`${mockUser.totalPoints} pts`}
+          subText={`${user.totalPoints} pts`}
         />
         <StatCard
           label="Racha"
-          value={`${mockUser.streakdays} días`}
+          value={`${displayHabits.reduce((max, h) => Math.max(max, h.streak), 0)} días`}
           icon="🔥"
           variant="primary"
           subText="Máxima"
         />
         <StatCard
           label="Hábitos Hoy"
-          value={`${mockUser.habitsCompletedToday}/${mockHabits.filter(h => h.isToday).length}`}
+          value={`${todayCompleted}/${todayHabits.length}`}
           icon="✓"
           variant="primary"
           subText={`${progressPercentage}%`}
         />
         <StatCard
-          label="Amigos"
-          value={mockUser.friends}
-          icon="👥"
+          label="Hábitos Totales"
+          value={displayHabits.length}
+          icon="📋"
           variant="warning"
-          subText="Conectados"
+          subText="Activos"
         />
       </div>
 
@@ -153,15 +199,19 @@ export default function DashboardPage() {
         {/* Daily Checklist */}
         <div className="lg:col-span-2 space-y-6">
           <DailyChecklist
-            habits={mockHabits.filter(h => h.isToday).map(h => ({
+            habits={todayHabits.map(h => ({
               id: h.id,
               name: h.name,
               category: h.category,
-              isCompleted: h.isCompleted,
+              isCompleted: false,
             }))}
-            onToggle={(id, completed) => {
+            onToggle={(_id, completed) => {
               if (completed) {
-                setTodayCompleted(todayCompleted + 1)
+                const result = completeHabitWithRewards(_id)
+                if (result.success) {
+                  setTodayCompleted(todayCompleted + 1)
+                  toast.success(`¡+${result.pointsEarned + result.streakBonus} puntos! 🎉`)
+                }
               } else {
                 setTodayCompleted(Math.max(0, todayCompleted - 1))
               }
@@ -180,7 +230,7 @@ export default function DashboardPage() {
               </Link>
             </div>
             <div className="space-y-4">
-              {mockHabits.slice(0, 3).map((habit) => (
+              {displayHabits.slice(0, 3).map((habit) => (
                 <HabitCard
                   key={habit.id}
                   id={habit.id}
@@ -189,8 +239,8 @@ export default function DashboardPage() {
                   streak={habit.streak}
                   maxStreak={habit.maxStreak}
                   points={habit.points}
-                  progress={40}
-                  isCompleted={habit.isCompleted}
+                  progress={Math.round((habit.streak / habit.maxStreak) * 100)}
+                  isCompleted={false}
                   variant="compact"
                 />
               ))}

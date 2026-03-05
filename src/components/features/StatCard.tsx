@@ -1,4 +1,4 @@
-import { ProgressBar, Badge } from '@/components/ui'
+
 import { formatNumber } from '@/utils/formatters'
 import clsx from 'clsx'
 

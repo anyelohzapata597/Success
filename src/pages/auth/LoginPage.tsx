@@ -1,23 +1,10 @@
 import { Card, CardHeader, CardBody } from '@/components/ui'
 import { LoginForm } from '@/components/forms'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
 
 export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleSubmit = async (data: { email: string; password: string }) => {
-    setIsLoading(true)
-    try {
-      // Simular llamada a API (se reemplazará con Firebase en Fase 3)
-      console.log('Login intent:', data)
-      toast.success('¡Sesión iniciada correctamente!')
-      // navigate('/dashboard')
-    } catch (error) {
-      toast.error('Error al iniciar sesión')
-    } finally {
-      setIsLoading(false)
-    }
+  const handleSubmit = (data: { email: string; password: string }) => {
+    // The LoginForm handles the submission now
+    console.log('Form submitted with data:', data)
   }
 
   return (
@@ -28,7 +15,7 @@ export default function LoginPage() {
           <p className="text-gray-600">Continúa tu camino hacia el éxito</p>
         </CardHeader>
         <CardBody>
-          <LoginForm onSubmit={handleSubmit} isLoading={isLoading} />
+          <LoginForm onSubmit={handleSubmit} />
         </CardBody>
       </Card>
     </div>

@@ -1,27 +1,41 @@
 /**
  * Profile Page Component
  */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardHeader, CardBody, CardFooter, Badge, Button } from '@/components/ui'
 import { Avatar } from '@/components/ui'
 import { FormInput, FormTextarea, FormCheckbox } from '@/components/ui'
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@/components/ui'
+import { useAuth } from '@/hooks'
+import toast from 'react-hot-toast'
 
 export default function ProfilePage() {
+  const { user } = useAuth()
   const [isEditing, setIsEditing] = useState(false)
   const [profileData, setProfileData] = useState({
-    name: 'Juan Pérez',
-    email: 'juan@ejemplo.com',
-    bio: 'Emprendedor apasionado por el desarrollo personal y la tecnología.',
+    name: '',
+    email: '',
+    bio: '',
   })
 
-  // Mock data
+  // Initialize profile data from authenticated user
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        name: user.displayName,
+        email: user.email,
+        bio: '',
+      })
+    }
+  }, [user])
+
+  // Mock stats based on user level and points
   const userStats = {
-    level: 12,
-    points: 4250,
-    joinDate: 'Enero 15, 2026',
-    habitsCreated: 15,
-    habitsCompleted: 157,
+    level: user?.level || 1,
+    points: user?.totalPoints || 0,
+    joinDate: user?.createdAt ? new Date(user.createdAt).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Hoy',
+    habitsCreated: 0,
+    habitsCompleted: 0,
   }
 
   const notifications = [
@@ -56,9 +70,21 @@ export default function ProfilePage() {
   ]
 
   const handleSaveProfile = () => {
-    console.log('Profile saved:', profileData)
+    toast.success('Perfil actualizado correctamente')
     setIsEditing(false)
   }
+
+  if (!user) {
+    return <div className="text-center py-8">Cargando perfil...</div>
+  }
+
+  // Generate initials from name
+  const initials = profileData.name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -69,7 +95,7 @@ export default function ProfilePage() {
       <Card className="mb-8">
         <CardBody>
           <div className="flex items-start gap-6">
-            <Avatar initials="JP" size="lg" />
+            <Avatar initials={initials} size="lg" />
             <div className="flex-1">
               <div className="flex justify-between items-start">
                 <div>
